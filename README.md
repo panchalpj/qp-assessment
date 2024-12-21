@@ -135,11 +135,117 @@ This application provides RESTful APIs for managing grocery items and user order
 ---
 
 ## **Contributors**
-- **Your Name**: Developer
-- **Your Team**: Backend Development Team
+- **Your Name**: Pankaj Panchal
+- **Your Team**: Pankaj Panchal
 
 ---
 
 ## **License**
 This project is licensed under the MIT License.
 
+
+# Setup For Spring Boot Application with Docker
+
+This project is a Spring Boot application that has been containerized using Docker for easy deployment and scaling.
+
+## Prerequisites
+
+Before you start, make sure you have the following installed:
+
+- [Docker](https://www.docker.com/get-started) (for containerization)
+- Java 17 or above (for local development and building the application)
+- Maven or Gradle (for building the application, depending on your setup)
+
+## Project Setup
+
+1. **Clone the Repository**
+
+   Clone the repository to your local machine using the following command:
+
+   ```bash
+   git clone https://github.com/your-repository.git
+   cd your-repository
+   ```
+
+2. **Build the Application**
+
+   If you haven't already built the JAR file, you can build it using Maven or Gradle.
+
+   For Maven:
+   ```bash
+   mvn clean package
+   ```
+
+   For Gradle:
+   ```bash
+   ./gradlew build
+   ```
+
+3. **Dockerize the Application**
+
+   The `Dockerfile` is already configured for containerizing the Spring Boot application. Now, you can build the Docker image.
+
+### Docker Commands
+
+4. **Build the Docker Image**
+
+   To build the Docker image for the application, run the following command:
+
+   ```bash
+   docker build -t my-spring-boot-app .
+   ```
+
+   This will create a Docker image named `my-spring-boot-app`.
+
+5. **Run the Docker Container**
+
+   Once the image is built, you can run the application in a Docker container with the following command:
+
+   ```bash
+   docker run -p 9080:9080 my-spring-boot-app
+   ```
+
+   This command will map the container's port `9080` to your localhost's port `9080`, making the application accessible on `http://localhost:9080`.
+
+6. **Access the Application**
+
+   After the container is running, you can access your application via the following URL in your web browser or through an API client:
+
+   ```
+   http://localhost:9080
+   ```
+
+## Stopping the Docker Container
+
+To stop the running Docker container, use the following command:
+
+```bash
+docker stop <container_id>
+```
+
+You can find the `container_id` by running:
+
+```bash
+docker ps
+```
+
+## Additional Configuration
+
+You can modify the memory settings and Java options for the container by adjusting the `JAVA_OPTS` environment variable in the `Dockerfile`. For example:
+
+```Dockerfile
+ENV JAVA_OPTS="-Xms4G -Xmx7G -XX:+UseG1GC"
+```
+
+This can be useful if you need to adjust the heap size or garbage collection settings for your application.
+
+## Troubleshooting
+
+- **Docker Build Issues**: If you encounter issues while building the Docker image, ensure Docker is properly installed and running on your machine.
+- **Port Conflicts**: If port `9080` is already in use, you can map the container to another available port on your machine by modifying the `docker run` command:
+
+  ```bash
+  docker run -p 9090:9090 my-spring-boot-app
+  ```
+
+  This will map container port `9090` to your local port `9090`.
