@@ -1,21 +1,13 @@
 FROM openjdk:21-jdk-slim-buster
 
-# Environment Variables
-ENV JAVA_OPTS="-XX:+UseZGC \
-                -XX:+UseStringDeduplication \
-                -XX:ZCollectionInterval=60 \
-                -XX:ZFragmentationLimit=15 \
-                -XX:ZUncommitDelay=60 \
-                -XX:+ZGenerational \
-                -XX:+UseCompressedOops \
-                -Xms4G \
-                -Xmx7G \
-                -XX:+UseContainerSupport \
-                -XX:MaxRAMPercentage=80.0 \
-                -XX:+UseStringDeduplication \
-                -Xlog:gc*:file=gc.log:time,uptime,level,tags"
-
+# Set the working directory in the container
 WORKDIR /app
-COPY /build/libs/qp-assessment-*-RELEASE.jar report.jar
-EXPOSE 8088
-ENTRYPOINT ["java", "-jar", "report.jar"]
+
+# Copy the JAR file into the container
+COPY /build/libs/qp-assessment-*-RELEASE.jar app.jar
+
+# Expose the port that the app will run on
+EXPOSE 9080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
