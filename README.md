@@ -1,4 +1,4 @@
-# Grocery and Order Management API
+# Grocery and Order Management Sample API's 
 
 This application provides RESTful APIs for managing grocery items and user orders. The system supports CRUD operations for groceries, placing orders, and fetching order details for users.
 
